@@ -2,7 +2,7 @@ SETUP:
 Clone the git repository to any one of OSU's flip servers.
 Run the following commands to install the necessary depenencies:
 pip3 install --user virtualenv
-python3 -m venv
+python3 -m venv .
 source ./bin/activate
 pip3 install flask-mysqldb
 pip3 install gunicorn
@@ -24,5 +24,5 @@ ps ax | grep gunicorn
 specific gunicorn instance. It will look like /nfs/stak/users/YOURONID/whateverelse
 
 Then run the following command to kill the server:
-kill -p xxxxx
+kill xxxxx
 ^Where xxxxx is the number you found for your process
