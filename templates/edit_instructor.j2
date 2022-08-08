@@ -8,7 +8,7 @@
 <body>
     <div>
         <table border="1" cellpadding="5"> 
-            <caption> Editing User: </caption>
+            <caption> Editing Instructor: </caption>
             <!-- Access data tuple passed from app.py -->
             {% if data %}
                 <thead>
@@ -38,7 +38,7 @@
         </table>
 
         <div id="edit">
-            <!-- form to edit data in bsg_people-->
+            <!-- form to edit data in Instructors-->
             <form id="editInstructor" action="/edit_instructor/{{data[0].instructorID}}" method="post">
                 <legend><strong>Edit Instructor</strong></legend>
                 <fieldset>
@@ -57,7 +57,7 @@
                 
                 </fieldset>
                 <input type="submit" value="Edit Instructor" name="Edit_Instructor" class="btn btn-primary" style="margin:.5rem;">
-                <a href='/customers'><input class="btn" type="button" value="cancel"></a>
+                <a href='/instructors'><input class="btn" type="button" value="cancel"></a>
             </form>
 
 </html>
