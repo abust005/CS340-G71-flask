@@ -297,8 +297,40 @@ def instructors():
         cur.execute(query)
         data = cur.fetchall()
 
-        # render edit_people page passing our query data and homeworld data to the edit_people template
+        # render instructor page
         return render_template("instructors.j2", data=data)
+
+@app.route("/edit_instructor/<int:instructorID>", methods=["POST", "GET"])
+def edit_instructor(instructorID):
+    if request.method == "GET":
+        # mySQL query to grab the info of the person with our passed id
+        query = "SELECT * FROM Instructors WHERE instructorID = %s" % (instructorID)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+
+        # render edit_instructor
+        return render_template("edit_instructor.j2", data=data)
+
+    # meat and potatoes of our update functionality
+    if request.method == "POST":
+        # fire off if user clicks the 'Edit Instructor' button
+        if request.form.get("Edit_Instructor"):
+            # grab user form inputs
+            instructorID = request.form["instructorID"]
+            firstName = request.form["firstName"]
+            lastName = request.form["lastName"]
+            instructEmail = request.form["instructEmail"]
+
+
+            query = "UPDATE Instructors SET firstName = %s, lastName = %s, instructEmail = %s WHERE instructorID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (firstName, lastName, instructEmail, instructorID))
+            mysql.connection.commit()
+
+            # redirect back to Instructors page after we execute the update query
+            return redirect("/instructors")
 
 @app.route("/delete_instructor/<int:instructorID>")
 def delete_instructor(instructorID):
